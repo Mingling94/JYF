@@ -3,8 +3,7 @@
 
 Contributors:
 
-
-Ming Chris Luo
-Tarik Clay
-Zarin Bhuiyan
-Nikin Tharan
+- Ming Chris Luo
+- Tarik Clay
+- Zarin Bhuiyan
+- Nikin Tharan
