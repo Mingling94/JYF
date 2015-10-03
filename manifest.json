@@ -11,5 +11,12 @@
   "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches":["https://www.facebook.com/*"],
+      "js":["js/jquery-1.11.3.min.js", "js/indico.js"],
+      "run_at": "document_end"
+    }
   ]
 }
