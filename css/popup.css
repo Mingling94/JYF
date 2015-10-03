@@ -1,0 +1,10 @@
+body {
+	font-family: "San-Francisco", Arial, sans-serif;
+	width: 560px;
+	height: 560px;
+	overflow-x:hidden;
+}
+
+h1 {
+    align: center;
+}
