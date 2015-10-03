@@ -6,5 +6,6 @@ body {
 }
 
 h1 {
-    align: center;
+    text-align: center;
+    margin-top: 1em;
 }
