@@ -145,7 +145,7 @@ function graphStatusData(sentiments) {
                 var x = item.datapoint[0],
                     y = item.datapoint[1];
 					var l= Math.round(y); 
-                showTooltip(item.pageX, item.pageY, l + ' HP for ' + 'post ' + x);
+                showTooltip(item.pageX, item.pageY, l + ' sentiment for ' + 'post ' + x);
             }
         }
         else {
