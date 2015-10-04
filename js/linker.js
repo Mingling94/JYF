@@ -1,4 +1,16 @@
-$(document).ready(function() {
+// Turns 1d array to 2d array for graphing
+function arrayTo2d(arr) {
+	var array2d = [];
+	for (var i = 0; i < arr.length; i++) {
+		var entry = [];
+		entry[0] = i; // x-value
+		entry[1] = 100 * arr[i]; // y-value
+		array2d[i] = entry;
+	}
+	return array2d;
+}
+
+function graphStatusData(sentiments) {
     // $('button').on('click', function() {
     //     $(this).animate({left: '200px'}, slow);
     //     alert("it works!"));
@@ -12,19 +24,15 @@ $(document).ready(function() {
 
     // Graph data scripts
 
-    var graphData = [{
-        // Visits
-            data: [ [6, 1300], [7, 1600], [8, 1900], [9, 2100], [10, 2500], [11, 2200], [12, 2000], [13, 1950], [14, 1900], [15, 2000] ],
-            color: '#71c73e'
-        }, {
-        // Returning Visits
-            data: [ [6, 500], [7, 600], [8, 550], [9, 600], [10, 800], [11, 900], [12, 800], [13, 850], [14, 830], [15, 1000] ],
+    var graphData = [
+        {
+            data: arrayTo2d(sentiments),
             color: '#77b7c5',
             points: { radius: 4, fillColor: '#77b7c5' }
         }
     ];
 
-        // Lines
+    // Lines
     $.plot($('.graph-lines'), graphData, {
         series: {
             points: {
@@ -44,14 +52,14 @@ $(document).ready(function() {
         },
         xaxis: {
             tickColor: 'transparent',
-            tickDecimals: 2
+            tickDecimals: 0
         },
         yaxis: {
-            tickSize: 1000
+            tickSize: 10
         }
     });
 
-        // Bars
+    // Bars
     $.plot($('.graph-bars'), graphData, {
         series: {
             bars: {
@@ -69,28 +77,32 @@ $(document).ready(function() {
         },
         xaxis: {
             tickColor: 'transparent',
-            tickDecimals: 2
+            tickDecimals: 0
         },
         yaxis: {
-            tickSize: 1000
+            tickSize: 10
         }
     });
 
-    $('#graph-bars').hide();
+    $('.graph-bars').hide();
 
     $('#lines').on('click', function (e) {
         $('#bars').removeClass('active');
-        $('#graph-bars').fadeOut();
+        $('.graph-bars').fadeOut();
+        $('.graph-bars').addClass('hidden');
         $(this).addClass('active');
-        $('#graph-lines').fadeIn();
+        $('.graph-lines').fadeIn();
+        $('.graph-lines').removeClass('hidden');
         e.preventDefault();
     });
 
     $('#bars').on('click', function (e) {
         $('#lines').removeClass('active');
-        $('#graph-lines').fadeOut();
+        $('.graph-lines').fadeOut();
+        $('.graph-lines').addClass('hidden');
         $(this).addClass('active');
-        $('#graph-bars').fadeIn().removeClass('hidden');
+        $('.graph-bars').fadeIn();
+        $('.graph-bars').removeClass('hidden');
         e.preventDefault();
     });
 
@@ -103,7 +115,7 @@ $(document).ready(function() {
 
     var previousPoint = null;
 
-    $('#graph-lines, #graph-bars').bind('plothover', function (event, pos, item) {
+    $('.graph-lines, .graph-bars').bind('plothover', function (event, pos, item) {
         if (item) {
             if (previousPoint != item.dataIndex) {
                 previousPoint = item.dataIndex;
@@ -118,4 +130,4 @@ $(document).ready(function() {
             previousPoint = null;
         }
     });
-});
+}
