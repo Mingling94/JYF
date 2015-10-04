@@ -25,7 +25,7 @@ $(document).ready(function() {
     ];
 
         // Lines
-    $.plot($('#graph-lines'), graphData, {
+    $.plot($('.graph-lines'), graphData, {
         series: {
             points: {
                 show: true,
@@ -52,7 +52,7 @@ $(document).ready(function() {
     });
 
         // Bars
-    $.plot($('#graph-bars'), graphData, {
+    $.plot($('.graph-bars'), graphData, {
         series: {
             bars: {
                 show: true,
@@ -118,10 +118,4 @@ $(document).ready(function() {
             previousPoint = null;
         }
     });
-
-
-
-
-
-
 });
