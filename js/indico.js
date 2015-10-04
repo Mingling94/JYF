@@ -9,6 +9,7 @@ function batchCall(list, endpoint, callback) {
 		data: JSON.stringify({"data": list}),
 		success: function (response) {
 			// Sendback to the parent extension
+			console.log(response);
 			callback(JSON.parse(response).results);
 		}, error: function(err) {
 			console.error(err);

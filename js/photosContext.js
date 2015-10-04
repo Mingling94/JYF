@@ -37,41 +37,42 @@ function getImages(callback) {
     var elements = document.getElementsByClassName('uiMediaThumbImg');
 
     // iterate over the elements, getting png urls
-	var imgs = [];
-    for (var i = 0; elements[i];i++) {
-		var temp = elements[i];
-        // get the background-image style property
-        temp = getStyle(temp, 'background-image');
+	var imgs = $.map(elements, function(element, index) {
+        element = getStyle(element, 'background-image');
 		// clip unnecessary info
-		var len = temp.length;
-		temp = temp.substring(4,len-1);
-
-		imgs[i] = temp;
-    }
+		var len = element.length;
+		element = element.substring(4,len-1);
+		return element;
+	});
 
     // iterate over the elements, converting png to base64
-	var photos = $.map(imgs, function(imgurl, index) {
+	var photos = [];
+	var semaphore = imgs.length;
+	imgs.map(function(imgurl, index) {
 		convertImgToBase64URL(imgurl, function(base64Img){
 		    // Base64DataURL
-			photos[index] = base64Img;
+			photos[index] = base64Img.substring(22);
+			// TODO: Is this how to waterfall these async processes?
+			semaphore--;
+			if (semaphore <= 0) {
+				console.log("SEMAPHORE DEPLETED");
+				batchCall(photos, "fer", callback);
+			}
 		});
 	});
-	console.log(photos);
-
-	// TODO: Convert images
-	//getSentiments_Img(results, callback);
 }
 
-// listen for icon trigger
-chrome.runtime.onMessage.addListener(
-	function(request, sender, sendResponse) {
-		if (request == "photos") {
-			getImages(function(results) {
-				sendResponse(results);
-			});
-		}
-		// Keep sendResponse asynchronously called
-		return true;
+// listen for icon trigger on photos page
+chrome.runtime.onConnect.addListener(function(port) {
+	if (port.name != "photos") {
+		alert(port);
+		return;
 	}
-);
+	port.onMessage.addListener(function(msg) {
+		getImages(function(results) {
+			port.postMessage(results);
+		});
+	});
+	return true;
+});
 
