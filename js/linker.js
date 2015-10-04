@@ -1,11 +1,25 @@
 // Turns 1d array to 2d array for graphing
+var avg=0;
 function arrayTo2d(arr) {
 	var array2d = [];
+	
 	for (var i = 0; i < arr.length; i++) {
 		var entry = [];
 		entry[0] = i; // x-value
 		entry[1] = 100 * arr[i]; // y-value
+		avg=avg+entry[1];
 		array2d[i] = entry;
+	}
+	avg=avg/arr.length;
+	avg=Math.round(avg);
+	document.getElementById("aver").innerHTML=avg;
+	if(avg>50)
+	{
+	document.getElementById("person_status").innerHTML="Positive Outlook";
+	}
+	else
+	{
+	document.getElementById("person_status").innerHTML="Negative Outlook";
 	}
 	return array2d;
 }
@@ -27,8 +41,8 @@ function graphStatusData(sentiments) {
     var graphData = [
         {
             data: arrayTo2d(sentiments),
-            color: '#77b7c5',
-            points: { radius: 4, fillColor: '#77b7c5' }
+            color: '#3B5998',
+            points: { radius: 4, fillColor: '#3B5998' }
         }
     ];
 
@@ -51,11 +65,13 @@ function graphStatusData(sentiments) {
             hoverable: true
         },
         xaxis: {
-            tickColor: 'transparent',
+			title: 'Number of Posts',
+			tickColor: 'transparent',
             tickDecimals: 0
         },
         yaxis: {
-            tickSize: 10
+		title: 'Weighed Happiness',
+	tickSize: 10
         }
     });
 
@@ -76,10 +92,14 @@ function graphStatusData(sentiments) {
             hoverable: true
         },
         xaxis: {
+			
+			title: 'Number of Posts',
             tickColor: 'transparent',
             tickDecimals: 0
         },
         yaxis: {
+			
+		title: 'Weighed Happiness',
             tickSize: 10
         }
     });
@@ -122,7 +142,8 @@ function graphStatusData(sentiments) {
                 $('#tooltip').remove();
                 var x = item.datapoint[0],
                     y = item.datapoint[1];
-                showTooltip(item.pageX, item.pageY, y + ' visitors at ' + x + '.00h');
+					var l= Math.round(y); 
+                showTooltip(item.pageX, item.pageY, l + ' HP for ' + 'post ' + x);
             }
         }
         else {
