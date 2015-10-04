@@ -84,25 +84,25 @@ function graphStatusData(sentiments) {
         }
     });
 
-    $('#graph-bars').hide();
+    $('.graph-bars').hide();
 
     $('#lines').on('click', function (e) {
         $('#bars').removeClass('active');
-        $('#graph-bars').fadeOut();
-        $('#graph-bars').addClass('hidden');
+        $('.graph-bars').fadeOut();
+        $('.graph-bars').addClass('hidden');
         $(this).addClass('active');
-        $('#graph-lines').fadeIn();
-        $('#graph-lines').removeClass('hidden');
+        $('.graph-lines').fadeIn();
+        $('.graph-lines').removeClass('hidden');
         e.preventDefault();
     });
 
     $('#bars').on('click', function (e) {
         $('#lines').removeClass('active');
-        $('#graph-lines').fadeOut();
-        $('#graph-lines').addClass('hidden');
+        $('.graph-lines').fadeOut();
+        $('.graph-lines').addClass('hidden');
         $(this).addClass('active');
-        $('#graph-bars').fadeIn();
-        $('#graph-bars').removeClass('hidden');
+        $('.graph-bars').fadeIn();
+        $('.graph-bars').removeClass('hidden');
         e.preventDefault();
     });
 
@@ -115,7 +115,7 @@ function graphStatusData(sentiments) {
 
     var previousPoint = null;
 
-    $('#graph-lines, #graph-bars').bind('plothover', function (event, pos, item) {
+    $('.graph-lines, .graph-bars').bind('plothover', function (event, pos, item) {
         if (item) {
             if (previousPoint != item.dataIndex) {
                 previousPoint = item.dataIndex;
