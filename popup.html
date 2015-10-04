@@ -7,13 +7,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Getting Started Extension's Popup</title>
+        <title>JYF</title>
     	<link rel="stylesheet" href="css/popup.css">
     </head>
     <body>
-        <h1>Testing comment</h1>
+        <h1 align="center">Gauge User Sentiments</h1>
         <div class="status"></div>
-        <div class="graph-wrapper">
+        <div align="center" class="graph-wrapper">
             <div class="graph-info">
                 <a href="javascript:void(0)" class="returning">Status Sentiments</a>
                 <a href="#" id="bars"><span></span></a>
@@ -23,15 +23,17 @@
                 <div class="graph-lines"></div>
                 <div class="graph-bars"></div>
             </div>
+			<table>
+		<tr>	
+		<td class="table_row">The average sentiment is: </td>
+		<td><p class="boxed" id="aver"></p></td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td>
+		<td class="table_row">The person has:</td>
+		<td><p class="boxed" id="person_status"></p></td>
+</tr>
+</table>
         </div>
-        <div class="middle">
-            <h1>Placeholder</h1>
-        </div>
-        <div class="bottom-row">
-            <button class="basic" style="color: rgb(20, 173, 195);">
-                <a href="options.html">Judge</a>
-            </button>
-        </div>
+        
         <img id="image-result" hidden>
         <script src="js/jquery-1.11.3.min.js"></script>
         <script src="js/jquery.flot.min.js"></script>
