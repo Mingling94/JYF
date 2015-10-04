@@ -5,7 +5,7 @@ function arrayTo2d(arr) {
 		return;
 	}
 	var array2d = [];
-	
+
 	for (var i = 0; i < arr.length; i++) {
 		var entry = [];
 		entry[0] = i; // x-value
@@ -50,12 +50,12 @@ function graphPhotoData(results) {
 	console.log(averages, count);
 	$("#fersection").removeClass("hidden");
 	$("#sentsection").addClass("hidden");
-	$("#Angry").text(averages[0]/count);
-	$("#Fear").text(averages[1]/count);
-	$("#Happy").text(averages[2]/count);
-	$("#Neutral").text(averages[3]/count);
-	$("#Sad").text(averages[4]/count);
-	$("#Surprised").text(averages[5]/count);
+	$("#Angry").text("Angry: " + averages[0]/count);
+	$("#Fear").text("Fear: " + averages[1]/count);
+	$("#Happy").text("Happy: " + averages[2]/count);
+	$("#Neutral").text("Neutral: " + averages[3]/count);
+	$("#Sad").text("Sad: " + averages[4]/count);
+	$("#Surprised").text("Surprised: " + averages[5]/count);
 	console.log(averages, count);
 }
 
@@ -124,13 +124,13 @@ function graphStatusData(sentiments) {
             hoverable: true
         },
         xaxis: {
-			
+
 			title: 'Number of Posts',
             tickColor: 'transparent',
             tickDecimals: 0
         },
         yaxis: {
-			
+
 		title: 'Weighed Happiness',
             tickSize: 10
         }
@@ -174,7 +174,7 @@ function graphStatusData(sentiments) {
                 $('#tooltip').remove();
                 var x = item.datapoint[0],
                     y = item.datapoint[1];
-					var l= Math.round(y); 
+					var l= Math.round(y);
                 showTooltip(item.pageX, item.pageY, l + ' sentiment for ' + 'post ' + x);
             }
         }
