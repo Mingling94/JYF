@@ -1,11 +1,29 @@
 body {
 	font-family: "San-Francisco", Arial, sans-serif;
-	width: 560px;
-	height: 560px;
+	width: 1200px;
+	height: 360px;
 	overflow-x:hidden;
 }
 
 h1 {
     text-align: center;
     margin-top: 1em;
+}
+
+.middle {
+	margin: 10%;
+}
+
+.options-middle {
+	float: left;
+}
+
+.bottom-row {
+	color: #b52727;
+	margin-right: 3em;
+	float: right;
+}
+
+button {
+	text-align: center;
 }
