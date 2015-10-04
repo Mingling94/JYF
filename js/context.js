@@ -19,7 +19,9 @@ function getSentiments(posts, callback) {
 function getStatuses(callback) {
 	// Process array of <p> elements
 	var posts = $("p").map(function() {
-		return $(this)[0].innerText;
+		var post = $(this)[0].innerText;
+		if (post)
+			return post;
 	}).get();
 	// Sendback to the parent extension
 	getSentiments(posts, callback);
