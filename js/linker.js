@@ -29,16 +29,43 @@ function arrayTo2d(arr) {
 	return array2d;
 }
 
+function graphPhotoData(results) {
+	var averages = [0,0,0,0,0,0];
+	var count = results.length;
+	results.forEach(function(result, index) {
+		var i = 0;
+		for (var emo in result) {
+			if (!(i < 6)) {
+				break;
+			}
+			if (result.hasOwnProperty(emo)) {
+				var value = result[emo];
+				if (value >= .05) {
+					averages[i] += value;
+				}
+			}
+			i++;
+		}
+	});
+	console.log(averages, count);
+	$("#fersection").removeClass("hidden");
+	$("#sentsection").addClass("hidden");
+	$("#Angry").text(averages[0]/count);
+	$("#Fear").text(averages[1]/count);
+	$("#Happy").text(averages[2]/count);
+	$("#Neutral").text(averages[3]/count);
+	$("#Sad").text(averages[4]/count);
+	$("#Surprised").text(averages[5]/count);
+	console.log(averages, count);
+}
+
 function graphStatusData(sentiments) {
     // $('button').on('click', function() {
     //     $(this).animate({left: '200px'}, slow);
-    //     alert("it works!"));
     // });
     $('div.bottom-row').on('click', 'button.basic', function() {
         // $(this).slideDown('slow', function() {
-        //     alert("done!");
         // });
-        //alert("It works!")
     })
 
     // Graph data scripts

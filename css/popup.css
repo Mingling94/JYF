@@ -132,7 +132,7 @@ button {
 }
 
 .hidden {
-	display: hidden;
+	display: none;
 }
 
 #lines.active, #bars.active {
