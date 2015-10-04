@@ -11,17 +11,13 @@
   },
   "permissions": [
     "activeTab",
+    "tabs",
     "https://ajax.googleapis.com/"
   ],
   "content_scripts": [
     {
-      "matches":["https://www.facebook.com/*/photos*"],
-      "js":["js/jquery-1.11.3.min.js", "js/photosContext.js"],
-      "run_at": "document_end"
-    },{
       "matches":["https://www.facebook.com/*"],
-      "exclude_matches":["https://www.facebook.com/*/photos*"],
-      "js":["js/jquery-1.11.3.min.js", "js/postContext.js"],
+      "js":["js/jquery-1.11.3.min.js", "js/indico.js", "js/photosContext.js", "js/postContext.js"],
       "run_at": "document_end"
     }
   ]

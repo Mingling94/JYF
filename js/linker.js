@@ -1,6 +1,9 @@
 // Turns 1d array to 2d array for graphing
 var avg=0;
 function arrayTo2d(arr) {
+	if (!arr) {
+		return;
+	}
 	var array2d = [];
 	
 	for (var i = 0; i < arr.length; i++) {
