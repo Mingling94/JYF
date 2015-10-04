@@ -1,6 +1,6 @@
 body {
 	font-family: "San Francisco", Arial, sans-serif;
-	width: 1200px;
+	width: 650px;
 	height: 360px;
 	overflow-x:hidden;
 }
@@ -8,10 +8,15 @@ body {
 h1 {
     text-align: center;
     margin-top: 1em;
-}
+font-family: "San Francisco", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+  color: #646464;
+  
+	}
 
 .graph {
 	background-color: rgb(60, 108, 217);
+	
 	float: left;
 }
 
@@ -108,10 +113,10 @@ button {
 }
 
 .graph-info .visitors { border-bottom: 2px solid #71c73e; }
-.graph-info .returning { border-bottom: 2px solid #77b7c5; }
+.graph-info .returning { border-bottom: 2px solid #3B5998 ; }
 
 .graph-info .visitors:before { background: #71c73e; }
-.graph-info .returning:before { background: #77b7c5; }
+.graph-info .returning:before { background: #3B5998 ; }
 
 
 /* Lines & Bars Buttons */
@@ -184,4 +189,21 @@ button {
     display: none;
     padding: 5px 10px;
     border: 1px solid #e1e1e1;
+}
+
+.boxed {
+	font-family: "San Francisco", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+	color: #646464;
+  border-bottom: 2px solid #3B5998 ;
+}
+
+.table_row{
+	 font-family: "San Francisco", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+	color: #646464;
 }
