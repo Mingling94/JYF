@@ -1,14 +1,15 @@
 // TODO: hide apikey?
 var apikey = "368f9df404609aed0e36f71d89e5b992";
-var test = ["what", "about", "this"];
-function getSentiments(posts, callback) {
+
+// Feed the posts into indico
+function batchCall(list, endpoint, callback) {
 	$.ajax({
-		url: "https://apiv2.indico.io/sentiment/batch?key=" + apikey,
+		url: "https://apiv2.indico.io/" + endpoint + "/batch?key=" + apikey,
 		type: "POST",
-		data: JSON.stringify({"data": posts}),
-		success: function (data) {
+		data: JSON.stringify({"data": list}),
+		success: function (response) {
 			// Sendback to the parent extension
-			callback(JSON.parse(data).results);
+			callback(JSON.parse(response).results);
 		}, error: function(err) {
 			console.error(err);
 		}
@@ -24,13 +25,13 @@ function getStatuses(callback) {
 			return post;
 	}).get();
 	// Sendback to the parent extension
-	getSentiments(posts, callback);
+	batchCall(posts, 'sentiment', callback);
 }
 
 // listen for icon trigger
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		if (request == "getStatuses") {
+		if (request == "indico") {
 			getStatuses(function(results) {
 				sendResponse(results);
 			});
