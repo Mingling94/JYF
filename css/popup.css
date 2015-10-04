@@ -126,7 +126,7 @@ button {
     padding: 0;
     margin-right: 0;
     margin-left: 10px;
-    border-bottom: 2px solid #71c73e;
+    border-bottom: 2px solid #3B5998;
     float: right;
     cursor: pointer;
 }
@@ -142,7 +142,7 @@ button {
     background: -webkit-linear-gradient(top, #82d344 0%,#71c73e 100%);
     background: -o-linear-gradient(top, #82d344 0%,#71c73e 100%);
     background: -ms-linear-gradient(top, #82d344 0%,#71c73e 100%);
-    background: linear-gradient(to bottom, #82d344 0%,#71c73e 100%);
+    background: linear-gradient(to bottom, #d7e3fc 0%,#d7e3fc 100%);
 }
 
 #lines span, #bars span {
@@ -191,13 +191,25 @@ button {
     border: 1px solid #e1e1e1;
 }
 
-.boxed {
+.boxed{
 	font-family: "San Francisco", 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 12px;
     line-height: 20px;
 	color: #646464;
   border-bottom: 2px solid #3B5998 ;
+}
+
+.boxed2{
+	font-family: "San Francisco", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+	color: #646464;
+   padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
 }
 
 .table_row{
