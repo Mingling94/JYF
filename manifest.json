@@ -3,20 +3,21 @@
 
   "name": "JYF",
   "description": "Judge Your Friends!",
-  "version": "4.6",
+  "version": "5",
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "JYF-logo-icon.png",
     "default_popup": "popup.html",
     "default_title": "Judge!"
   },
   "permissions": [
     "activeTab",
+    "tabs",
     "https://ajax.googleapis.com/"
   ],
   "content_scripts": [
     {
       "matches":["https://www.facebook.com/*"],
-      "js":["js/jquery-1.11.3.min.js", "js/context.js"],
+      "js":["js/jquery-1.11.3.min.js", "js/indico.js", "js/photosContext.js", "js/postContext.js"],
       "run_at": "document_end"
     }
   ]
