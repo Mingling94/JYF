@@ -2,7 +2,7 @@
 var avg=0;
 function arrayTo2d(arr) {
 	var array2d = [];
-	
+
 	for (var i = 0; i < arr.length; i++) {
 		var entry = [];
 		entry[0] = i; // x-value
@@ -16,10 +16,12 @@ function arrayTo2d(arr) {
 	if(avg>50)
 	{
 	document.getElementById("person_status").innerHTML="Positive Outlook";
+	$("#person_status").css("background-color", "rgba(183, 232, 157, 0.34)");
 	}
 	else
 	{
 	document.getElementById("person_status").innerHTML="Negative Outlook";
+	$("#person_status").css("background-color", "rgba(232, 163, 157, 0.34)");
 	}
 	return array2d;
 }
@@ -92,13 +94,13 @@ function graphStatusData(sentiments) {
             hoverable: true
         },
         xaxis: {
-			
+
 			title: 'Number of Posts',
             tickColor: 'transparent',
             tickDecimals: 0
         },
         yaxis: {
-			
+
 		title: 'Weighed Happiness',
             tickSize: 10
         }
@@ -142,7 +144,7 @@ function graphStatusData(sentiments) {
                 $('#tooltip').remove();
                 var x = item.datapoint[0],
                     y = item.datapoint[1];
-					var l= Math.round(y); 
+					var l= Math.round(y);
                 showTooltip(item.pageX, item.pageY, l + ' HP for ' + 'post ' + x);
             }
         }
