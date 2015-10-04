@@ -4,17 +4,39 @@
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
  -->
-<html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
-	<!--link rel="stylesheet" href="styles.css"-->
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/popup.js"></script>
-  </head>
-  <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Getting Started Extension's Popup</title>
+    	<link rel="stylesheet" href="css/popup.css">
+    </head>
+    <body>
+        <h1>Testing comment</h1>
+        <div class="status"></div>
+        <div class="graph-wrapper">
+            <div class="graph-info">
+                <a href="javascript:void(0)" class="visitors">Visitors</a>
+                <a href="javascript:void(0)" class="returning">Returning Visitors</a>
+                <a href="#" id="bars"><span></span></a>
+                <a href="#" id="lines" class="active"><span></span></a>
+            </div>
+            <div class="graph-container">
+                <div class="graph-lines"></div>
+                <div class="graph-bars"></div>
+            </div>
+        </div>
+        <div class="middle">
+            <h1>Placeholder</h1>
+        </div>
+        <div class="bottom-row">
+            <button class="basic" style="color: rgb(20, 173, 195);">
+                <a href="options.html">Judge</a>
+            </button>
+        </div>
+        <img id="image-result" hidden>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/jquery.flot.min.js"></script>
+        <script src="js/linker.js"></script>
+        <script src="popup.js"></script>
+    </body>
 </html>
-
