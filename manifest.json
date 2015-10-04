@@ -15,7 +15,7 @@
   "content_scripts": [
     {
       "matches":["https://www.facebook.com/*"],
-      "js":["js/jquery-1.11.3.min.js", "js/indico.js"],
+      "js":["js/jquery-1.11.3.min.js", "js/context.js"],
       "run_at": "document_end"
     }
   ]
