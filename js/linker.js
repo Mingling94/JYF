@@ -1,5 +1,4 @@
 // Turns 1d array to 2d array for graphing
-var avg=0;
 function arrayTo2d(arr) {
 	if (!arr) {
 		return;
@@ -10,66 +9,29 @@ function arrayTo2d(arr) {
 		var entry = [];
 		entry[0] = i; // x-value
 		entry[1] = 100 * arr[i]; // y-value
-		avg=avg+entry[1];
 		array2d[i] = entry;
-	}
-	avg=avg/arr.length;
-	avg=Math.round(avg);
-	document.getElementById("aver").innerHTML=avg;
-	if(avg>50)
-	{
-	document.getElementById("person_status").innerHTML="Positive Outlook";
-	$("#person_status").css("background-color", "rgba(99, 240, 24,0.59)");
-	}
-	else
-	{
-	document.getElementById("person_status").innerHTML="Negative Outlook";
-	$("#person_status").css("background-color", "rgba(232, 163, 157,0.34)");
 	}
 	return array2d;
 }
 
-function graphPhotoData(results) {
-	var averages = [0,0,0,0,0,0];
-	var count = results.length;
-	results.forEach(function(result, index) {
-		var i = 0;
-		for (var emo in result) {
-			if (!(i < 6)) {
-				break;
-			}
-			if (result.hasOwnProperty(emo)) {
-				var value = result[emo];
-				if (value >= .05) {
-					averages[i] += value;
-				}
-			}
-			i++;
-		}
-	});
-	console.log(averages, count);
-	$("#fersection").removeClass("hidden");
-	$("#sentsection").addClass("hidden");
-	$("#Angry").text("Angry: " + averages[0]/count);
-	$("#Fear").text("Fear: " + averages[1]/count);
-	$("#Happy").text("Happy: " + averages[2]/count);
-	$("#Neutral").text("Neutral: " + averages[3]/count);
-	$("#Sad").text("Sad: " + averages[4]/count);
-	$("#Surprised").text("Surprised: " + averages[5]/count);
-	console.log(averages, count);
-}
-
 function graphStatusData(sentiments) {
-	// $('button').on('click', function() {
-	//	 $(this).animate({left: '200px'}, slow);
-	// });
-	$('div.bottom-row').on('click', 'button.basic', function() {
-		// $(this).slideDown('slow', function() {
-		// });
-	})
-
+	// Show Average
+	var sum = 0;
+	for (var i = 0; i < sentiments.length; i++) {
+		sum = sum + sentiments[i];
+	}
+	var avg = sum/sentiments.length;
+	avg = Math.round(avg);
+	$("#aver").text(avg);
+	if(avg > 50) {
+		$("#person_status").text = "Positive Outlook";
+		$("#person_status").css("background-color", "rgba(99, 240, 24,0.59)");
+	} else {
+		$("#person_status").text = "Negative Outlook";
+		$("#person_status").css("background-color", "rgba(232, 163, 157,0.34)");
+	}
+	
 	// Graph data scripts
-
 	var graphData = [
 		{
 			data: arrayTo2d(sentiments),
@@ -102,8 +64,8 @@ function graphStatusData(sentiments) {
 			tickDecimals: 0
 		},
 		yaxis: {
-		title: 'Weighed Happiness',
-	tickSize: 10
+			title: 'Weighed Happiness',
+			tickSize: 10
 		}
 	});
 
@@ -134,7 +96,7 @@ function graphStatusData(sentiments) {
 		}
 	});
 
-	$('.graph-bars').hide();
+	$('.graph-lines').hide();
 
 	$('#lines').on('click', function (e) {
 		$('#bars').removeClass('active');
@@ -166,19 +128,50 @@ function graphStatusData(sentiments) {
 	var previousPoint = null;
 
 	$('.graph-lines, .graph-bars').bind('plothover', function (event, pos, item) {
-		if (item) {
-			if (previousPoint != item.dataIndex) {
-				previousPoint = item.dataIndex;
-				$('#tooltip').remove();
-				var x = item.datapoint[0],
-					y = item.datapoint[1];
-					var l= Math.round(y); 
-				showTooltip(item.pageX, item.pageY, l + ' HP for ' + 'post ' + x);
-			}
-		}
-		else {
+		if (!item) {
 			$('#tooltip').remove();
 			previousPoint = null;
+			return;
+		}
+
+		if (previousPoint != item.dataIndex) {
+			previousPoint = item.dataIndex;
+			$('#tooltip').remove();
+			var x = item.datapoint[0],
+				y = item.datapoint[1];
+				var l= Math.round(y); 
+			showTooltip(item.pageX, item.pageY, l + ' HP for ' + 'post ' + x);
 		}
 	});
 }
+
+function graphPhotoData(results) {
+	var averages = [0, 0, 0, 0, 0, 0];
+	var count = results.length;
+	results.forEach(function(result, index) {
+		var i = 0;
+		for (var emo in result) {
+			if (!(i < 6)) {
+				break;
+			}
+			if (result.hasOwnProperty(emo)) {
+				var value = result[emo];
+				if (value >= .05) {
+					averages[i] += value;
+				}
+				// TODO: If the value is below .05, remove it from being counted in the average
+			}
+			i++;
+		}
+	});
+
+	$("#fersection").removeClass("hidden");
+	$("#sentsection").addClass("hidden");
+	$("#Angry").text(averages[0]/count);
+	$("#Fear").text(averages[1]/count);
+	$("#Happy").text(averages[2]/count);
+	$("#Neutral").text(averages[3]/count);
+	$("#Sad").text(averages[4]/count);
+	$("#Surprised").text(averages[5]/count);
+}
+
