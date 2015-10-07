@@ -60,127 +60,125 @@ function graphPhotoData(results) {
 }
 
 function graphStatusData(sentiments) {
-    // $('button').on('click', function() {
-    //     $(this).animate({left: '200px'}, slow);
-    // });
-    $('div.bottom-row').on('click', 'button.basic', function() {
-        // $(this).slideDown('slow', function() {
-        // });
-    })
+	// $('button').on('click', function() {
+	//	 $(this).animate({left: '200px'}, slow);
+	// });
+	$('div.bottom-row').on('click', 'button.basic', function() {
+		// $(this).slideDown('slow', function() {
+		// });
+	})
 
-    // Graph data scripts
+	// Graph data scripts
 
-    var graphData = [
-        {
-            data: arrayTo2d(sentiments),
-            color: '#3B5998',
-            points: { radius: 4, fillColor: '#3B5998' }
-        }
-    ];
+	var graphData = [
+		{
+			data: arrayTo2d(sentiments),
+			color: '#3B5998',
+			points: { radius: 4, fillColor: '#3B5998' }
+		}
+	];
 
-    // Lines
-    $.plot($('.graph-lines'), graphData, {
-        series: {
-            points: {
-                show: true,
-                radius: 5
-            },
-            lines: {
-                show: true
-            },
-            shadowSize: 0
-        },
-        grid: {
-            color: '#646464',
-            borderColor: 'transparent',
-            borderWidth: 20,
-            hoverable: true
-        },
-        xaxis: {
+	// Lines
+	$.plot($('.graph-lines'), graphData, {
+		series: {
+			points: {
+				show: true,
+				radius: 5
+			},
+			lines: {
+				show: true
+			},
+			shadowSize: 0
+		},
+		grid: {
+			color: '#646464',
+			borderColor: 'transparent',
+			borderWidth: 20,
+			hoverable: true
+		},
+		xaxis: {
 			title: 'Number of Posts',
 			tickColor: 'transparent',
-            tickDecimals: 0
-        },
-        yaxis: {
+			tickDecimals: 0
+		},
+		yaxis: {
 		title: 'Weighed Happiness',
 	tickSize: 10
-        }
-    });
+		}
+	});
 
-    // Bars
-    $.plot($('.graph-bars'), graphData, {
-        series: {
-            bars: {
-                show: true,
-                barWidth: .9,
-                align: 'center'
-            },
-            shadowSize: 0
-        },
-        grid: {
-            color: '#646464',
-            borderColor: 'transparent',
-            borderWidth: 20,
-            hoverable: true
-        },
-        xaxis: {
-
+	// Bars
+	$.plot($('.graph-bars'), graphData, {
+		series: {
+			bars: {
+				show: true,
+				barWidth: .9,
+				align: 'center'
+			},
+			shadowSize: 0
+		},
+		grid: {
+			color: '#646464',
+			borderColor: 'transparent',
+			borderWidth: 20,
+			hoverable: true
+		},
+		xaxis: {
 			title: 'Number of Posts',
-            tickColor: 'transparent',
-            tickDecimals: 0
-        },
-        yaxis: {
+			tickColor: 'transparent',
+			tickDecimals: 0
+		},
+		yaxis: {
+			title: 'Weighed Happiness',
+			tickSize: 10
+		}
+	});
 
-		title: 'Weighed Happiness',
-            tickSize: 10
-        }
-    });
+	$('.graph-bars').hide();
 
-    $('.graph-bars').hide();
+	$('#lines').on('click', function (e) {
+		$('#bars').removeClass('active');
+		$('.graph-bars').fadeOut();
+		$('.graph-bars').addClass('hidden');
+		$(this).addClass('active');
+		$('.graph-lines').fadeIn();
+		$('.graph-lines').removeClass('hidden');
+		e.preventDefault();
+	});
 
-    $('#lines').on('click', function (e) {
-        $('#bars').removeClass('active');
-        $('.graph-bars').fadeOut();
-        $('.graph-bars').addClass('hidden');
-        $(this).addClass('active');
-        $('.graph-lines').fadeIn();
-        $('.graph-lines').removeClass('hidden');
-        e.preventDefault();
-    });
+	$('#bars').on('click', function (e) {
+		$('#lines').removeClass('active');
+		$('.graph-lines').fadeOut();
+		$('.graph-lines').addClass('hidden');
+		$(this).addClass('active');
+		$('.graph-bars').fadeIn();
+		$('.graph-bars').removeClass('hidden');
+		e.preventDefault();
+	});
 
-    $('#bars').on('click', function (e) {
-        $('#lines').removeClass('active');
-        $('.graph-lines').fadeOut();
-        $('.graph-lines').addClass('hidden');
-        $(this).addClass('active');
-        $('.graph-bars').fadeIn();
-        $('.graph-bars').removeClass('hidden');
-        e.preventDefault();
-    });
+	function showTooltip(x, y, contents) {
+		$('<div id="tooltip">' + contents + '</div>').css({
+			top: y - 16,
+			left: x + 20
+		}).appendTo('body').fadeIn();
+	}
 
-    function showTooltip(x, y, contents) {
-        $('<div id="tooltip">' + contents + '</div>').css({
-            top: y - 16,
-            left: x + 20
-        }).appendTo('body').fadeIn();
-    }
+	var previousPoint = null;
 
-    var previousPoint = null;
-
-    $('.graph-lines, .graph-bars').bind('plothover', function (event, pos, item) {
-        if (item) {
-            if (previousPoint != item.dataIndex) {
-                previousPoint = item.dataIndex;
-                $('#tooltip').remove();
-                var x = item.datapoint[0],
-                    y = item.datapoint[1];
-					var l= Math.round(y);
-                showTooltip(item.pageX, item.pageY, l + ' sentiment for ' + 'post ' + x);
-            }
-        }
-        else {
-            $('#tooltip').remove();
-            previousPoint = null;
-        }
-    });
+	$('.graph-lines, .graph-bars').bind('plothover', function (event, pos, item) {
+		if (item) {
+			if (previousPoint != item.dataIndex) {
+				previousPoint = item.dataIndex;
+				$('#tooltip').remove();
+				var x = item.datapoint[0],
+					y = item.datapoint[1];
+					var l= Math.round(y); 
+				showTooltip(item.pageX, item.pageY, l + ' HP for ' + 'post ' + x);
+			}
+		}
+		else {
+			$('#tooltip').remove();
+			previousPoint = null;
+		}
+	});
 }
