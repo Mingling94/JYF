@@ -5,7 +5,7 @@
   "description": "Judge Your Friends!",
   "version": "5.5",
   "browser_action": {
-    "default_icon": "JYF-logo-icon.png",
+    "default_icon": "assets/JYF-logo-icon.png",
     "default_popup": "popup.html",
     "default_title": "Judge!"
   },
@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches":["https://www.facebook.com/*"],
-      "js":["js/jquery-1.11.3.min.js", "js/indico.js", "js/photosContext.js", "js/postContext.js"],
+      "js":["lib/jquery-1.11.3.min.js", "js/indico.js", "js/photosContext.js", "js/postContext.js"],
       "run_at": "document_end"
     }
   ]

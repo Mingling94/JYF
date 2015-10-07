@@ -5,57 +5,55 @@
  value "popup.html".
  -->
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>JYF</title>
-    	<link rel="stylesheet" href="css/popup.css">
-    </head>
-    <body>
-<div class="hidden" id="fersection">
-	<h1>Facial Emotional Recognition</h1>
+	<head>
+		<meta charset="UTF-8">
+		<title>JYF</title>
+		<link rel="stylesheet" href="css/popup.css">
+	</head>
+	<body>
+		<!-- Just Text -->
+		<div class="hidden" id="fersection">
+			<h1>Facial Emotional Recognition</h1>
+			<div align="center" id="Angry"> </div>
+			<div align="center" id="Fear"> </div>
+			<div align="center" id="Happy"> </div>
+			<div align="center" id="Neutral"> </div>
+			<div align="center" id="Sad"> </div>
+			<div align="center" id="Surprised"> </div>
+		</div>
 
-    <div align="center" id="Angry"> </div>
+		<!-- Graphs -->
+		<div id="sentsection">
+			<h1 align="center">Gauge User Sentiments</h1>
+			<div class="status"></div>
+			<div align="center" class="graph-wrapper">
+	
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">Status Sentiments</a>
+					<a href="#" id="bars"><span>Bar</span></a>
+					<a href="#" id="lines" class="active"><span>Line</span></a>
+				</div>
+				<div class="graph-container">
+					<div class="graph-lines"></div>
+					<div class="graph-bars"></div>
+				</div>
+		</div>
 
-    <div align="center" id="Fear"> </div>
+		<!-- Summary of stats -->
+		<table>
+			<tr>	
+				<td class="table_row">The average sentiment is: </td>
+				<td><p class="boxed" id="aver"></p></td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td>
+				<td class="table_row">The person has:</td>
+				<td><p class="boxed2" id="person_status"></p></td>
+			</tr>
+		</table>
 
-    <div align="center" id="Happy"> </div>
-
-    <div align="center" id="Neutral"> </div>
-
-    <div align="center" id="Sad"> </div>
-
-    <div align="center" id="Surprised"> </div>
-</div>
-<div id="sentsection">
-        <h1 align="center">Gauge User Sentiments</h1>
-        <div class="status"></div>
-        <div align="center" class="graph-wrapper">
-
-            <div class="graph-info">
-                <a href="javascript:void(0)" class="returning">Status Sentiments</a>
-                <a href="#" id="bars"><span>Bar</span></a>
-                <a href="#" id="lines" class="active"><span>Line</span></a>
-            </div>
-            <div class="graph-container">
-                <div class="graph-lines"></div>
-                <div class="graph-bars"></div>
-            </div>
-</div>
-<table>
-		<tr>	
-		<td class="table_row">The average sentiment is: </td>
-		<td><p class="boxed" id="aver"></p></td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td>
-		<td class="table_row">The person has:</td>
-		<td><p class="boxed2" id="person_status"></p></td>
-</tr>
-</table>
-        </div>
-        
-        <img id="image-result" hidden>
-        <script src="js/jquery-1.11.3.min.js"></script>
-        <script src="js/jquery.flot.min.js"></script>
-        <script src="js/linker.js"></script>
-        <script src="js/popup.js"></script>
-    </body>
+		<!-- Javascript -->
+		<script src="lib/jquery-1.11.3.min.js"></script>
+		<script src="lib/jquery.flot.min.js"></script>
+		<script src="js/linker.js"></script>
+		<script src="js/popup.js"></script>
+	</body>
 </html>
