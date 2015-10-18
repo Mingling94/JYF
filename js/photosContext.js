@@ -51,7 +51,7 @@ function convertImg(url, callback, outputFormat){
 }   
 
 // Convert images to indico compatible file format
-function pngToBase64(pngs) {
+function pngToBase64(pngs, callback) {
 	// convert png images to base64
 	var base64Imgs = [];
 	var imageCount = pngs.length;
@@ -63,8 +63,7 @@ function pngToBase64(pngs) {
 			// TODO: Is this how to waterfall these async processes?
 			imageCount--;
 			if (imageCount <= 0) {
-				console.log("Images done loading!");
-				return base64Imgs;
+				callback(base64Imgs);
 			}
 		});
 	});
@@ -72,17 +71,21 @@ function pngToBase64(pngs) {
 
 // listen for icon trigger on photos page
 chrome.runtime.onConnect.addListener(function(port) {
-	if (port.name != "photos") {
+	if (port.name != 'photos') {
 		alert(port);
 		return;
 	}
 	port.onMessage.addListener(function(msg) {
 		var thumbnails = getThumbnails();
-		var base64Imgs = pngToBase64(thumbnails)
-		batchCall(base64Imgs, "fer", function(result) {
-			port.postMessage({
-				thumbnails: thumbnails,
-				results: results,
+		pngToBase64(thumbnails, function(base64Imgs) {
+			// TODO: This is callback hell, but is it necessary to async this
+			// way to wait for image conversion to finish?
+			console.log(thumbnails, base64Imgs);
+			batchCall(base64Imgs, 'fer', function(results) {
+				port.postMessage({
+					thumbnails: thumbnails,
+					results: results,
+				});
 			});
 		});
 	});

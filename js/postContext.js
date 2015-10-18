@@ -22,7 +22,7 @@ function getPosts(callback) {
 
 // listen for icon trigger on timeline
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if (request == "posts") {
+	if (request == 'posts') {
 		var posts = getPosts();
 		batchCall(posts, 'sentiment', function(results) {
 			sendResponse({

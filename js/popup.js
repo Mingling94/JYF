@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			var port = chrome.tabs.connect(tab.id, {name: "photos"});
 			port.postMessage("photos");
 			port.onMessage.addListener(function(response) {
-				graphPhotoData(response);
+				graphPhotoData(response.results);
 			});
 		// Or on a newsfeed/timeline/some other page with posts
 		} else if (tab.url.indexOf("facebook.com") > -1) {
