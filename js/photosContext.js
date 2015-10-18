@@ -27,6 +27,49 @@ function getThumbnails(callback) {
 	return pngImgs;
 }
 
+ /**
+ * Convert an image 
+ * to a base64 url
+ * @param  {String}   url
+ * @param  {Function} callback
+ * @param  {String}   [outputFormat=image/png]
+ */
+function convertImg(url, callback, outputFormat){
+	var img = new Image();
+	img.crossOrigin = 'Anonymous';
+	img.onload = function(){
+		var canvas = document.createElement('CANVAS'),
+		ctx = canvas.getContext('2d'), dataURL;
+		canvas.height = this.height;
+		canvas.width = this.width;
+		ctx.drawImage(this, 0, 0);
+		dataURL = canvas.toDataURL(outputFormat);
+		callback(dataURL);
+		canvas = null; 
+	};
+	img.src = url;
+}   
+
+// Convert images to indico compatible file format
+function pngToBase64(pngs) {
+	// convert png images to base64
+	var base64Imgs = [];
+	var imageCount = pngs.length;
+	pngs.map(function(url, index) {
+		convertImg(url, function(base64Img){
+			// Base64DataURL
+			base64Imgs[index] = base64Img.substring(22);
+
+			// TODO: Is this how to waterfall these async processes?
+			imageCount--;
+			if (imageCount <= 0) {
+				console.log("Images done loading!");
+				return base64Imgs;
+			}
+		});
+	});
+}
+
 // listen for icon trigger on photos page
 chrome.runtime.onConnect.addListener(function(port) {
 	if (port.name != "photos") {
@@ -36,8 +79,12 @@ chrome.runtime.onConnect.addListener(function(port) {
 	port.onMessage.addListener(function(msg) {
 		var thumbnails = getThumbnails();
 		var base64Imgs = pngToBase64(thumbnails)
-		var results = batchCall(base64Imgs, "fer");
-		port.postMessage(thumbnails, results));
+		batchCall(base64Imgs, "fer", function(result) {
+			port.postMessage({
+				thumbnails: thumbnails,
+				results: results,
+			});
+		});
 	});
 });
 

@@ -14,11 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		// Or on a newsfeed/timeline/some other page with posts
 		} else if (tab.url.indexOf("facebook.com") > -1) {
-			chrome.tabs.sendMessage(tab.id, "posts", function(response, otherresponse) {
+			chrome.tabs.sendMessage(tab.id, "posts", function(response) {
 				// TODO: Figure out how sendResponse's arguments get passed
-				alert(response);
-				alert(otherresponse);
-				//graphStatusData(response);
+				console.log(response);
+				graphStatusData(response.results);
 			});
 		} else {
 			alert("Navigate to a facebook photo page or timeline to use this extension!")
